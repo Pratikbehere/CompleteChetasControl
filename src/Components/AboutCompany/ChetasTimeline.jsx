@@ -1,55 +1,63 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
+// ✅ Import all timeline images
+import MD from "../../assets/Images/AboutCompany/TimeLine/MD.webp";
+import FlowMeasure from "../../assets/Images/AboutCompany/TimeLine/FlowMeasure.webp";
+import SaveWater from "../../assets/Images/AboutCompany/TimeLine/SaveWater.webp";
+import Ultrasonic from "../../assets/Images/AboutCompany/TimeLine/Ultrasonic.webp";
+import PicoSonic from "../../assets/Images/AboutCompany/TimeLine/PicoSonic.webp";
+import Parkhe from "../../assets/Images/AboutCompany/TimeLine/Parkhe.webp";
+import BulkMeters from "../../assets/Images/AboutCompany/TimeLine/BulkMeters.webp";
+
 const timelineEvents = [
   {
     year: "1989",
     title: "Incorporation",
     desc: "Chetas Control Pvt. Ltd. was founded, focusing on flow metering, instrumentation, and automation — emphasizing user-friendly systems over complex controls.",
-    img: "/src/assets/Images/AboutCompany/TimeLine/MD.webp",
+    img: MD,
   },
   {
     year: "Early 1990s",
     title: "Flow Measurement Experiments",
     desc: "Experimented with multiple flow measurement technologies before finalizing on ultrasonic transit-time technology.",
-    img: "/src/assets/Images/AboutCompany/TimeLine/FlowMeasure.webp",
+    img: FlowMeasure,
   },
   {
     year: "1995–2000",
     title: "Shift to Water Utility Industry",
     desc: "With growing national awareness about water management, Chetas shifted focus to the water utility sector, forming a strong R&D team.",
-    img: "/src/assets/Images/AboutCompany/TimeLine/SaveWater.webp",
+    img: SaveWater,
   },
   {
     year: "2001",
     title: "First Indian Ultrasonic Flow Meter Prototype",
     desc: "Developed India’s first ultrasonic transit-time flow meter, targeting large-pipe water measurement. Introduced PicoSonic range.",
-    img: "/src/assets/Images/AboutCompany/TimeLine/Ultrasonic.webp",
+    img: Ultrasonic,
   },
   {
     year: "2004",
     title: "Second-Generation PicoSonic",
     desc: "Launched 2nd generation PicoSonic flow meters with remote communication and inbuilt printer.",
-    img: "/src/assets/Images/AboutCompany/TimeLine/PicoSonic.webp",
+    img: PicoSonic,
   },
   {
     year: "2006",
     title: "National Recognition",
     desc: "Received the G.S. Parkhe Industrial Merit Award for import-substitute ultrasonic flow meter manufacturing.",
-    img: "/src/assets/Images/AboutCompany/TimeLine/Parkhe.webp",
+    img: Parkhe,
   },
   {
     year: "2007–2009",
     title: "Innovation in Bulk Metering",
     desc: "Developed JalSonic – a battery-operated ultrasonic water meter with GSM connectivity and tamper-proof design. Executed one of the largest ultrasonic meter orders.",
-    img: "/src/assets/Images/AboutCompany/TimeLine/BulkMeters.webp",
+    img: BulkMeters,
   },
 ];
 
-export default function ChetasTimeline() {
+export default function ChetasTimelineV3() {
   const containerRef = useRef(null);
 
-  // ✅ Hooks must always be top-level
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
@@ -101,9 +109,8 @@ export default function ChetasTimeline() {
                 }}
                 viewport={{ once: true, amount: 0.4 }}
               >
-                {/* IMAGE WITH CURTAIN REVEAL */}
+                {/* Image with Curtain Reveal */}
                 <div className="relative w-full md:w-1/2 rounded-2xl overflow-hidden shadow-xl border-2 border-blue-500">
-                  {/* Image */}
                   <motion.img
                     src={event.img}
                     alt={event.title}
