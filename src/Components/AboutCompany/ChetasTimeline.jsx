@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useScroll, useTransform, useAnimation } from "framer-motion";
 
-// ✅ Import all timeline images
+// ✅ Import timeline images
 import MD from "../../assets/Images/AboutCompany/TimeLine/MD.webp";
 import FlowMeasure from "../../assets/Images/AboutCompany/TimeLine/FlowMeasure.webp";
 import SaveWater from "../../assets/Images/AboutCompany/TimeLine/SaveWater.webp";
@@ -55,9 +55,51 @@ const timelineEvents = [
   },
 ];
 
-export default function ChetasTimelineV3() {
-  const containerRef = useRef(null);
+const rand = (min, max) => Math.random() * (max - min) + min;
 
+// 🪄 Floating Ball Component (Now with Labels)
+const FloatingBall = ({ color, size, top, left, label }) => {
+  const controls = useAnimation();
+
+  const move = async () => {
+    while (true) {
+      const x = rand(-300, 300);
+      const y = rand(-300, 300);
+      const duration = rand(10, 20);
+      await controls.start({
+        x,
+        y,
+        transition: { duration, ease: "easeInOut" },
+      });
+    }
+  };
+
+  useEffect(() => {
+    move();
+  }, []);
+
+  return (
+    <motion.div
+      className="absolute flex items-center justify-center rounded-full pointer-events-none select-none font-semibold text-white text-xs md:text-sm"
+      style={{
+        top: `${top}%`,
+        left: `${left}%`,
+        width: size,
+        height: size,
+        background: color,
+        boxShadow: `0 0 ${parseInt(size) / 1.5}px ${color}88`,
+        zIndex: 0,
+        opacity: 0.9,
+      }}
+      animate={controls}
+    >
+      {label}
+    </motion.div>
+  );
+};
+
+export default function ChetasTimeline() {
+  const containerRef = useRef(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start center", "end center"],
@@ -66,35 +108,69 @@ export default function ChetasTimelineV3() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
   const dotPosition = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
+  const [floatingBalls, setFloatingBalls] = useState([]);
+
+  // 🎈 Generate floating balls
+  useEffect(() => {
+    const darkColors = [
+      "#1e8a1eff",
+      "#312E81",
+      "#3B0764",
+      "#1E40AF",
+      "#4338CA",
+      "#3730A3",
+      "#4C1D95",
+      "#0F172A",
+      "#1E293B",
+    ];
+
+    const labels = [
+      "MD", "Flow", "Save", "Water", "R&D", "Tech", "Chetas", "Pico",
+      "Ultra", "Sonic", "Team", "Award", "Jal", "Meter", "Precision",
+      "Innovation", "Quality", "Vision", "Trust", "Legacy",
+    ];
+
+    const balls = Array.from({ length: 80 }, (_, i) => ({
+      id: i,
+      color: darkColors[Math.floor(Math.random() * darkColors.length)],
+      size: `${rand(30, 70)}px`,
+      top: rand(0, 100),
+      left: rand(0, 100),
+      label: labels[i % labels.length],
+    }));
+
+    setFloatingBalls(balls);
+  }, []);
+
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-gray-100 via-white to-gray-100 py-20 overflow-hidden">
+      {/* Floating Balls */}
+      {floatingBalls.map((b) => (
+        <FloatingBall key={b.id} {...b} />
+      ))}
+
       {/* Header */}
-      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-gray-800 mb-24 font-roboto">
+      <h2 className="text-4xl md:text-5xl font-extrabold text-center text-gray-800 mb-24 font-roboto relative z-10">
         Decades of Precision and Innovation
       </h2>
 
       {/* Timeline Container */}
       <div ref={containerRef} className="relative max-w-6xl mx-auto pb-20">
-        {/* Sticky Center Line */}
+        {/* Center Line */}
         <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-[4px] bg-gray-300 rounded" />
-
-        {/* Animated Progress Line */}
         <motion.div
           className="absolute left-1/2 top-0 -translate-x-1/2 w-[4px] bg-gradient-to-b from-blue-400 via-blue-500 to-blue-600 rounded origin-top"
           style={{ height: lineHeight }}
         />
-
-        {/* Moving Dot */}
         <motion.div
           className="absolute left-1/2 w-6 h-6 bg-blue-600 rounded-full shadow-lg -translate-x-1/2"
           style={{ top: dotPosition }}
         />
 
         {/* Timeline Events */}
-        <div className="flex flex-col gap-40 relative">
+        <div className="flex flex-col gap-40 relative z-10">
           {timelineEvents.map((event, i) => {
             const isLeft = i % 2 === 0;
-
             return (
               <motion.div
                 key={i}
@@ -103,10 +179,7 @@ export default function ChetasTimelineV3() {
                 }`}
                 initial={{ opacity: 0, y: 100 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.9,
-                  ease: "easeOut",
-                }}
+                transition={{ duration: 0.9, ease: "easeOut" }}
                 viewport={{ once: true, amount: 0.4 }}
               >
                 {/* Image with Curtain Reveal */}
