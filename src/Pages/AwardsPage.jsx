@@ -1,7 +1,12 @@
 import React from 'react';
+import BannerAwards from '../Components/Awards/BannerAwards';
+import AwardsGallery from '../Components/Awards/AwardsGallery';
 
 const AwardsPage = () => {
-  return <></>;
+  return <>
+  <BannerAwards/>
+  <AwardsGallery/>
+  </>;
 };
 
 export default AwardsPage;

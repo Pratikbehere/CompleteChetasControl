@@ -1,5 +1,6 @@
 import React from "react";
 import { FaWater, FaBolt, FaIndustry, FaCog } from "react-icons/fa";
+import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
 
 // ✅ Import images from src/assets
 import smartMetering from "../../assets/Images/Services/smart-metering.jpeg";
@@ -65,6 +66,7 @@ const services = [
     icon: <FaIndustry />,
     color: "text-purple-500",
     bullets: ["Structural check", "Alerts & alarms", "Remote access"],
+    link: "/services/dam-monitoring", // ✅ Added link for navigation
   },
   {
     id: 7,
@@ -87,12 +89,10 @@ const services = [
 ];
 
 export default function ServicesMasonry() {
+  const navigate = useNavigate(); // ✅ Initialize navigate
+
   return (
     <div className="w-full bg-gray-50 py-16 px-6 sm:px-8 font-['Roboto']">
-      {/* <h2 className="text-3xl sm:text-4xl font-semibold text-center mb-12 text-gray-800 tracking-wide">
-        Our Services
-      </h2> */}
-
       {/* Grid layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {services.map((service) => (
@@ -123,7 +123,14 @@ export default function ServicesMasonry() {
                     <li key={i}>{b}</li>
                   ))}
                 </ul>
-                <button className="mt-auto px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full shadow-md hover:scale-105 transition-all duration-300">
+
+                {/* ✅ Navigate to Dam Monitoring when clicked */}
+                <button
+                  className="mt-auto px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full shadow-md hover:scale-105 transition-all duration-300"
+                  onClick={() => {
+                    if (service.link) navigate(service.link);
+                  }}
+                >
                   Learn More
                 </button>
               </div>
