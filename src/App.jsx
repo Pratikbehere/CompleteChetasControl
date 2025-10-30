@@ -12,9 +12,11 @@ import Navbar from "./Components/Reuse/Navbar";
 import Footer from "./Components/Reuse/Footer";
 import DamMonitoring from "./Pages/Services/DamMonitoring";
 import ScadaAutomation from "./Pages/Services/ScadaAutomation";
+import ScrollToTop from "./Components/Reuse/ScrollToTop";
 function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />  
       {/* Global layout wrapper */}
       <div className="flex flex-col min-h-screen bg-white">
         {/* Navbar (fixed top if needed) */}

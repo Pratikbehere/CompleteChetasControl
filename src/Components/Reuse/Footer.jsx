@@ -116,10 +116,11 @@ export default function Footer() {
           <h2 className="text-xl font-semibold text-white mb-4">Quick Links</h2>
           <ul className="space-y-2 text-sm">
             {[
-              { name: "Home", path: "/" },
-              { name: "About Us", path: "/about" },
-              { name: "Services", path: "/services" },
-              { name: "Contact Us", path: "/contact" },
+             { name: "Home", path: "/" },
+      { name: "About Us", path: "/aboutCompanyPage" },  // use the actual path
+      { name: "Services", path: "/services" },
+      { name: "Awards", path: "/awardsPage" },          // added separately
+      { name: "Contact Us", path: "/contact" },
             ].map((link, i) => (
               <motion.li key={i} whileHover={{ x: 6, color: "#38bdf8" }}>
                 <Link

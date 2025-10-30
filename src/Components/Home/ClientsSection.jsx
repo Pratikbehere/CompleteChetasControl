@@ -19,7 +19,7 @@ const row1 = [
   { name: "MIDC", image: midc, review: "Smart and accurate flow monitoring systems, enhancing operational efficiency." },
   { name: "Jal Jivan Mission", image: jaljivan, review: "Innovative and effective automation solutions for rural water supply projects." },
 ];
-
+ 
 const row2 = [
   { name: "Maharashtra Jeevan Pradhikaran", image: mjp, review: "Excellent service and modern technology implementation for water infrastructure." },
   { name: "Navi Mumbai Mahanagarpalika", image: navi, review: "Trusted partner for advanced water management and monitoring solutions." },
