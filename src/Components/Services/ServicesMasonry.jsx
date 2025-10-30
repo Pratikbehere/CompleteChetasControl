@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaWater, FaBolt, FaIndustry, FaCog } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // ✅ Import navigation hook
+import { useNavigate } from "react-router-dom";
 
-// ✅ Import images from src/assets
+// ✅ Import images
 import smartMetering from "../../assets/Images/Services/smart-metering.jpeg";
 import scada from "../../assets/Images/Services/scada.jpeg";
 import waterAudits from "../../assets/Images/Services/water-audits.jpeg";
@@ -30,7 +30,7 @@ const services = [
     icon: <FaCog />,
     color: "text-green-500",
     bullets: ["Remote control", "Instant alerts", "Data logging"],
-     link: "/services/scada-automation", 
+    link: "/services/scada-automation",
   },
   {
     id: 3,
@@ -67,7 +67,7 @@ const services = [
     icon: <FaIndustry />,
     color: "text-purple-500",
     bullets: ["Structural check", "Alerts & alarms", "Remote access"],
-    link: "/services/dam-monitoring", // ✅ Added link for navigation
+    link: "/services/dam-monitoring",
   },
   {
     id: 7,
@@ -90,33 +90,45 @@ const services = [
 ];
 
 export default function ServicesMasonry() {
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate();
+  const [flippedCards, setFlippedCards] = useState({});
+
+  const toggleFlip = (id) => {
+    setFlippedCards((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
 
   return (
     <div className="w-full bg-gray-50 py-16 px-6 sm:px-8 font-['Roboto']">
-      {/* Grid layout */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         {services.map((service) => (
-          <div key={service.id} className="group perspective">
-            <div className="relative w-full h-80 transition-transform duration-700 transform-style-preserve-3d group-hover:rotate-y-180">
-              
-              {/* Front side */}
-              <div className="absolute w-full h-full backface-hidden rounded-3xl overflow-hidden border-2 border-gray-300 shadow-lg bg-gradient-to-br from-white via-gray-50 to-white flex flex-col items-center justify-center p-4 hover:shadow-2xl hover:border-gray-400 transition-all duration-300">
-                <div className="w-full h-48 flex items-center justify-center bg-gray-100 rounded-xl overflow-hidden p-4">
+          <div
+            key={service.id}
+            className="group perspective cursor-pointer"
+            onClick={() => toggleFlip(service.id)} // flip on mobile tap
+          >
+            <div
+              className={`relative w-full h-80 transition-transform duration-700 transform-style-preserve-3d ${
+                flippedCards[service.id] ? "rotate-y-180" : ""
+              } md:group-hover:rotate-y-180`}
+            >
+              {/* FRONT SIDE */}
+              <div className="absolute inset-0 w-full h-full backface-hidden rounded-3xl border border-gray-200 shadow-md bg-white flex flex-col items-center justify-between p-4 transition-all duration-300">
+                <div className="w-full flex-1 flex items-center justify-center rounded-xl bg-gray-50 overflow-hidden">
                   <img
                     src={service.img}
                     alt={service.title}
-                    className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-105"
+                    style={{ transform: "translateZ(0)" }}
                   />
                 </div>
-                <div className="p-5 flex flex-col items-center text-center">
-                  <div className={`${service.color} text-4xl mb-3`}>{service.icon}</div>
+                <div className="p-3 text-center">
+                  <div className={`${service.color} text-4xl mb-2`}>{service.icon}</div>
                   <h3 className="text-lg font-bold text-gray-800">{service.title}</h3>
                 </div>
               </div>
 
-              {/* Back side */}
-              <div className="absolute w-full h-full backface-hidden rotate-y-180 rounded-3xl overflow-hidden border-2 border-gray-300 shadow-lg bg-white flex flex-col items-center justify-center p-5 hover:shadow-2xl hover:border-gray-400 transition-all duration-300">
+              {/* BACK SIDE */}
+              <div className="absolute inset-0 w-full h-full backface-hidden rotate-y-180 rounded-3xl border border-gray-200 shadow-md bg-white flex flex-col items-center justify-center p-5 transition-all duration-300">
                 <h3 className="text-lg font-bold text-gray-800 mb-2">{service.title}</h3>
                 <p className="text-gray-600 text-sm mb-3">{service.desc}</p>
                 <ul className="text-gray-700 text-sm mb-4 list-disc list-inside text-left">
@@ -125,32 +137,32 @@ export default function ServicesMasonry() {
                   ))}
                 </ul>
 
-                {/* ✅ Navigate to Dam Monitoring when clicked */}
                 <button
                   className="mt-auto px-5 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full shadow-md hover:scale-105 transition-all duration-300"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     if (service.link) navigate(service.link);
                   }}
                 >
                   Learn More
                 </button>
               </div>
-
             </div>
           </div>
         ))}
       </div>
 
-      {/* CSS for 3D flip effect */}
+      {/* ✅ CSS FIX FOR 3D FLIP */}
       <style jsx>{`
         .perspective {
-          perspective: 1000px;
+          perspective: 1200px;
         }
         .transform-style-preserve-3d {
           transform-style: preserve-3d;
         }
         .backface-hidden {
           backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
         }
         .rotate-y-180 {
           transform: rotateY(180deg);
