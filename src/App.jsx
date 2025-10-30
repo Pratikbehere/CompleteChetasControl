@@ -11,6 +11,7 @@ import Contact from "./Pages/Contact";
 import Navbar from "./Components/Reuse/Navbar";
 import Footer from "./Components/Reuse/Footer";
 import DamMonitoring from "./Pages/Services/DamMonitoring";
+import ScadaAutomation from "./Pages/Services/ScadaAutomation";
 function App() {
   return (
     <BrowserRouter>
@@ -30,6 +31,7 @@ function App() {
             <Route path="/awardsPage" element={<AwardsPage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/services/dam-monitoring" element={<DamMonitoring />} />
+             <Route path="/services/scada-automation" element={<ScadaAutomation />} />
           </Routes>
         </main>
 

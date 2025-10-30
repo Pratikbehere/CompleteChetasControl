@@ -30,6 +30,7 @@ const services = [
     icon: <FaCog />,
     color: "text-green-500",
     bullets: ["Remote control", "Instant alerts", "Data logging"],
+     link: "/services/scada-automation", 
   },
   {
     id: 3,
