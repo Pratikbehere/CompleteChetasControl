@@ -21,6 +21,7 @@ const services = [
     icon: <FaWater />,
     color: "text-blue-500",
     bullets: ["Monitor flow", "Track usage", "Reduce waste"],
+     link: "/services/smart-metering",
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const services = [
     icon: <FaWater />,
     color: "text-teal-500",
     bullets: ["Leak detection", "Usage report", "Optimize supply"],
+     link: "/services/Water-Audits",
   },
   {
     id: 4,
@@ -49,6 +51,7 @@ const services = [
     icon: <FaBolt />,
     color: "text-yellow-500",
     bullets: ["Easy setup", "Realtime data", "Remote monitoring"],
+     link: "/services/IOT",
   },
   {
     id: 5,
@@ -58,6 +61,7 @@ const services = [
     icon: <FaBolt />,
     color: "text-orange-500",
     bullets: ["Consumption tracking", "Efficiency tips", "Cost savings"],
+     link: "/services/Energy-Audits",
   },
   {
     id: 6,
@@ -77,6 +81,7 @@ const services = [
     icon: <FaIndustry />,
     color: "text-pink-500",
     bullets: ["High capacity", "Accurate data", "Automated reports"],
+      link: "/services/smart-metering",
   },
   {
     id: 8,
@@ -86,6 +91,7 @@ const services = [
     icon: <FaCog />,
     color: "text-indigo-500",
     bullets: ["Automatic readings", "Reduced errors", "Time-saving"],
+      link: "/services/AMR",
   },
 ];
 

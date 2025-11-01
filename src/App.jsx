@@ -1,7 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
-
+import WaterAudits from "./Pages/Services/WaterAudits";
+import EnergyAudits from "./Pages/Services/EnergyAudits";
+import IoTDeployment from "./Pages/Services/IoTDeployment";
 import Home from "./Pages/Home";
 import Services from "./Pages/Services";
 import AboutCompanyPage from "./Pages/AboutCompanyPage";
@@ -12,7 +14,10 @@ import Navbar from "./Components/Reuse/Navbar";
 import Footer from "./Components/Reuse/Footer";
 import DamMonitoring from "./Pages/Services/DamMonitoring";
 import ScadaAutomation from "./Pages/Services/ScadaAutomation";
+import SmartMetering from "./Pages/Services/SmartMetering";
 import ScrollToTop from "./Components/Reuse/ScrollToTop";
+
+import AMR from "./Pages/Services/AMR";
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +39,11 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/services/dam-monitoring" element={<DamMonitoring />} />
              <Route path="/services/scada-automation" element={<ScadaAutomation />} />
+             <Route path="/services/smart-metering" element={<SmartMetering />} />
+             <Route path="/services/AMR" element={<AMR />} />
+              <Route path="/services/Water-Audits" element={<WaterAudits />} />
+             <Route path="/services/Energy-Audits" element={<EnergyAudits />} />
+             <Route path="/services/IOT" element={<IoTDeployment />} />
           </Routes>
         </main>
 
