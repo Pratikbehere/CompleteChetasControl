@@ -38,7 +38,7 @@ const timelineEvents = [
   {
     year: "2004",
     title: "Second-Generation PicoSonic",
-    desc: "Launched 2nd generation PicoSonic flow meters with remote communication and inbuilt printer.",
+    desc: "Launched 2nd generation PicoSonic flow meters with remote communication .",
     img: PicoSonic,
   },
   {

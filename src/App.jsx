@@ -16,6 +16,9 @@ import DamMonitoring from "./Pages/Services/DamMonitoring";
 import ScadaAutomation from "./Pages/Services/ScadaAutomation";
 import SmartMetering from "./Pages/Services/SmartMetering";
 import ScrollToTop from "./Components/Reuse/ScrollToTop";
+import ClientTelangana from "./Pages/Clients/ClientTelangana";
+import ClientMIDC from "./Pages/Clients/ClientMIDC";
+
 
 import AMR from "./Pages/Services/AMR";
 function App() {
@@ -44,6 +47,8 @@ function App() {
               <Route path="/services/Water-Audits" element={<WaterAudits />} />
              <Route path="/services/Energy-Audits" element={<EnergyAudits />} />
              <Route path="/services/IOT" element={<IoTDeployment />} />
+             <Route path="/Clients/Telangana" element={<ClientTelangana />} />
+               <Route path="/Clients/MIDC" element={<ClientMIDC />} />
           </Routes>
         </main>
 

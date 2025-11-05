@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";  // ✅ ADDED
 
 import ahmedabad from "../../assets/Images/Home/Client/ahmedabad.webp";
 import cidco from "../../assets/Images/Home/Client/cidco.webp";
@@ -29,12 +30,31 @@ const row2 = [
 ];
 
 const ClientsSection = () => {
-  // Duplicate array once (we’ll render twice for smooth loop)
+
+  const navigate = useNavigate();   // ✅ ADDED
+
+  // ✅ Routing map
+  const handleCardClick = (clientName) => {
+    const routeMap = {
+      "Ahmedabad Municipal Corporation": "/Clients/Ahmedabad",
+      "CIDCO": "/Clients/CIDCO",
+      "DVC": "/Clients/DVC",
+      "MIDC": "/Clients/MIDC",
+      "Jal Jivan Mission": "/Clients/JalJivan",
+      "Maharashtra Jeevan Pradhikaran": "/Clients/MJP",
+      "Navi Mumbai Mahanagarpalika": "/Clients/NaviMumbai",
+      "NHP": "/Clients/NHP",
+      "Government of Telangana": "/Clients/Telangana",
+      "UP Jal Nigam": "/Clients/UPJalNigam",
+    };
+
+    navigate(routeMap[clientName]);   // ✅ NAVIGATE TO PAGE
+  };
+
   const duplicate = (arr) => [...arr, ...arr];
 
   return (
     <section className="relative w-full py-20 sm:py-28 bg-gradient-to-b from-sky-50 via-sky-100 to-sky-200 font-['Roboto'] overflow-hidden">
-      {/* Heading */}
       <div className="text-center mb-16 px-4 sm:px-6 relative z-10">
         <h2 className="text-3xl sm:text-5xl md:text-6xl font-normal text-black drop-shadow-lg">
           Our Clients
@@ -55,15 +75,13 @@ const ClientsSection = () => {
                 y: -6,
                 transition: { type: "spring", stiffness: 200 },
               }}
-              className="client-card"
+
+              className="client-card cursor-pointer"   // ✅ ADDED
+              onClick={() => handleCardClick(client.name)}  // ✅ ADDED
             >
               <div className="flex items-center gap-3 sm:gap-4 w-full">
                 <div className="client-logo">
-                  <img
-                    src={client.image}
-                    alt={client.name}
-                    className="w-full h-full object-contain"
-                  />
+                  <img src={client.image} alt={client.name} className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col justify-center">
                   <h3 className="client-name">{client.name}</h3>
@@ -86,15 +104,13 @@ const ClientsSection = () => {
                 y: -6,
                 transition: { type: "spring", stiffness: 200 },
               }}
-              className="client-card"
+
+              className="client-card cursor-pointer"     // ✅ ADDED
+              onClick={() => handleCardClick(client.name)} // ✅ ADDED
             >
               <div className="flex items-center gap-3 sm:gap-4 w-full">
                 <div className="client-logo">
-                  <img
-                    src={client.image}
-                    alt={client.name}
-                    className="w-full h-full object-contain"
-                  />
+                  <img src={client.image} alt={client.name} className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col justify-center">
                   <h3 className="client-name">{client.name}</h3>
@@ -106,7 +122,7 @@ const ClientsSection = () => {
         </div>
       </div>
 
-      {/* Inline CSS */}
+      {/* ✅ Existing Styles (not touched) */}
       <style jsx>{`
         .marquee-container {
           overflow: hidden;
@@ -115,7 +131,6 @@ const ClientsSection = () => {
           padding: 0 1rem;
         }
 
-        /* Allow overflow when hovered so scaling cards are visible */
         .marquee-container:hover {
           overflow: visible;
           z-index: 20;
@@ -133,7 +148,6 @@ const ClientsSection = () => {
           animation: scroll-reverse 40s linear infinite;
         }
 
-        /* Smooth pause on hover */
         .marquee-container:hover .marquee {
           animation-play-state: paused;
         }
@@ -156,7 +170,6 @@ const ClientsSection = () => {
           }
         }
 
-        /* Responsive speed */
         @media (max-width: 640px) {
           .marquee {
             animation: scroll 25s linear infinite;
